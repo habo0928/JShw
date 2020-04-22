@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>iPadTable</title>
+  <style>
+    .table-striped {
+      width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Apple iPad</h1>
+  <div id="msg"></div>
+  <table>
+    <thead>
+      <tr>
+        <th onclick="Sku()"></th>
+        <th onclick="Price()"></th>
+        <th onclick="Storages()"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+
+  <script>
+
+    let body = document.querySelector('body');
+    body.classList.add('body');
+    body.classList.add('text-center');
+    let table = document.querySelector('table');
+    table.classList.add('table');
+    table.classList.add('table-striped');
+
+    let thead = document.querySelector('thead');
+    let tbody = document.querySelector('tbody');
+
+
+
+
+    let ipad = '';
+    window.onload = function () {
+      let xhr = new XMLHttpRequest;
+      xhr.onload = function () {
+
+        ipad = JSON.parse(this.responseText);
+        const titlesArray = Object.keys(ipad[0]);
+        addThead(titlesArray);
+
+        ipad.forEach((item) => {
+          addTbody(Object.values(item))
+        });
+      }
+      xhr.open("GET", "http://127.0.0.1:5500/iPad.json");
+      xhr.send();
+    }
+
+    function addThead(titlesArray) {
+      titlesArray.forEach((item, index) => {
+        let _th = document.querySelectorAll('th');
+        _th[index].innerHTML = item;
+        for (let i = 0; i < index; i++) {
+          table.rows[0].cells[i].innerHTML = titlesArray[i] + ' ↕';
+        }
+      });
+    }
+
+    function addTbody(rowArray) {
+      let _tr = document.createElement('tr');
+      tbody.append(_tr);
+
+      rowArray.forEach((item) => {
+        let _td = document.createElement('td');
+        _td.innerHTML = item;
+        _tr.appendChild(_td);
+      });
+    }
+
+    let i = 0;
+    function Sku() {
+      let id;
+      if (i == 0) {
+        i = 1;
+        table.rows[0].cells[0].innerHTML = 'sku' + ' ↓';
+        id = ipad.sort(function (a, b) {
+          let skuA = a.sku;
+          let skuB = b.sku;
+          if (skuA > skuB) {
+            return -1;
+          }
+        });
+      }
+      else {
+        i = 0;
+        table.rows[0].cells[0].innerHTML = 'sku' + ' ↑';
+        id = ipad.sort(function (a, b) {
+          let skuA = a.sku;
+          let skuB = b.sku;
+          if (skuA < skuB) {
+            return -1;
+          }
+        });
+      }
+      tbody.innerHTML = "";
+      id.forEach((item) => {
+        addTbody(Object.values(item))
+      });
+    }
+
+    function Price() {
+      let id;
+      if (i == 0) {
+        i = 1;
+        table.rows[0].cells[1].innerHTML = 'price' + ' ↓';
+        id = ipad.sort(function (a, b) {
+          let priceA = a.price;
+          let priceB = b.price;
+          if (priceA > priceB) {
+            return -1;
+          }
+        });
+      }
+      else {
+        i = 0;
+        table.rows[0].cells[1].innerHTML = 'price' + ' ↑';
+        id = ipad.sort(function (a, b) {
+          let priceA = a.price;
+          let priceB = b.price;
+          if (priceA < priceB) {
+            return -1;
+          }
+        });
+      }
+      tbody.innerHTML = "";
+      id.forEach((item) => {
+        addTbody(Object.values(item))
+      });
+    }
+
+    function Storages() {
+      let id;
+      if (i == 0) {
+        i = 1;
+        table.rows[0].cells[2].innerHTML = 'storage' + ' ↓';
+        id = ipad.sort(function (a, b) {
+          let storageA = a.storage;
+          let storageB = b.storage;
+          if (storageA > storageB) {
+            return -1;
+          }
+        });
+      }
+      else {
+        i = 0;
+        table.rows[0].cells[2].innerHTML = 'storage' + ' ↑';
+        id = ipad.sort(function (a, b) {
+          let storageA = a.storage;
+          let storageB = b.storage;
+          if (storageA < storageB) {
+            return -1;
+          }
+        });
+      }
+      tbody.innerHTML = "";
+      id.forEach((item) => {
+        addTbody(Object.values(item))
+      });
+    }
+
+  </script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
