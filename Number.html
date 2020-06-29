@@ -29,6 +29,9 @@
         .btn-success{
             width: 36px;
         }
+        #txt{
+            text-align:right;
+        }
     </style>
 </head>
 
@@ -36,39 +39,85 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-12">
-                <label id="guessNum">0-100</label>
+                
+                <label id="guessNum">
+                <span id="mix">0</span>-<span id="max">100</span></label>
+                
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-info" id="makeNum">產生數字</button>
+                <button onclick="makeNum(this)" type="button" class="btn btn-info" id="makeNum">遊戲開始</button>
             </div>
             <div class="col-12">
                 <input type="text" id="txt">
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-dark">1</button>
-                <button type="button" class="btn btn-dark">2</button>
-                <button type="button" class="btn btn-dark">3</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">1</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">2</button>
+                <button  onclick="getNum(this)"type="button" class="btn btn-dark">3</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-dark">4</button>
-                <button type="button" class="btn btn-dark">5</button>
-                <button type="button" class="btn btn-dark">6</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">4</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">5</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">6</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-dark">7</button>
-                <button type="button" class="btn btn-dark">8</button>
-                <button type="button" class="btn btn-dark">9</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">7</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">8</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">9</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-danger" id="clear">X</button>
-                <button type="button" class="btn btn-dark">0</button>
-                <button type="button" class="btn btn-success" id="input">V</button>
+                <button onclick="deleteNum()" type="button" class="btn btn-danger" id="clear">X</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-dark">0</button>
+                <button onclick="confirmNum()" type="button" class="btn btn-success" id="input">V</button>
             </div>
         </div>
     </div>
 
     <script>
-     
+        var randomNum = 0;
+        var txt = document.getElementById('txt');
+        var mix = document.getElementById('mix');
+        var max = document.getElementById('max');
+        
+        function getNum(le){
+            let num = le.innerText;
+            txt.value += num;
+        }
+
+        function makeNum(){
+            randomNum = Math.floor(Math.random()*100);
+        }
+
+        function deleteNum(){
+            txt.value = '';
+        }
+
+        function confirmNum(){
+            
+            if(randomNum == 0){
+                alert("請按遊戲開始");
+                txt.value = '';
+            }
+            else if(txt.value >100){
+                alert("超過遊戲範圍");
+                txt.value = '';
+            }
+            else if(txt.value < randomNum){
+                mix.innerText = txt.value;
+                txt.value = '';
+            }
+            else if(txt.value > randomNum){
+                max.innerText = txt.value;
+                txt.value = '';
+            } 
+            else if (txt.value == randomNum){
+                alert("恭喜答對 遊戲結束!!");
+                mix.innerText = 0;
+                max.innerText = 100;
+                randomNum = 0;
+                txt.value = '';
+            }
+        }
     </script>
 
 

@@ -27,7 +27,14 @@
         height: 60px;
         font-size: 25px;
     }
-    
+    .btn-dark{
+        width: 480px;
+        height: 60px;
+        font-size: 25px;
+    }
+    #txt{
+        text-align:right;
+    }
 </style>
 
 <body>
@@ -37,43 +44,45 @@
                 <input type="text" id="txt">
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-secondary">%</button>
-                <button type="button" class="btn btn-secondary">CE</button>
-                <button type="button" class="btn btn-secondary">C</button>
-                <button type="button" class="btn btn-secondary">3</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">7</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">8</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">9</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">×</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-secondary">⅟ₓ</button>
-                <button type="button" class="btn btn-secondary">x²</button>
-                <button type="button" class="btn btn-secondary">²√x</button>
-                <button type="button" class="btn btn-secondary">÷</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">4</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">5</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">6</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">-</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-secondary">7</button>
-                <button type="button" class="btn btn-secondary">8</button>
-                <button type="button" class="btn btn-secondary">9</button>
-                <button type="button" class="btn btn-secondary">×</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">1</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">2</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">3</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">+</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-secondary">4</button>
-                <button type="button" class="btn btn-secondary">5</button>
-                <button type="button" class="btn btn-secondary">6</button>
-                <button type="button" class="btn btn-secondary">-</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">÷</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">0</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">.</button>
+                <button onclick="getNum(this)" type="button" class="btn btn-secondary">=</button>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-secondary">1</button>
-                <button type="button" class="btn btn-secondary">2</button>
-                <button type="button" class="btn btn-secondary">3</button>
-                <button type="button" class="btn btn-secondary">+</button>
-            </div>
-            <div class="col-12">
-                <button type="button" class="btn btn-secondary">⁺/₋</button>
-                <button type="button" class="btn btn-secondary">0</button>
-                <button type="button" class="btn btn-secondary">.</button>
-                <button type="button" class="btn btn-secondary">=</button>
+                <button onclick="deleteNum()" type="button" class="btn btn-dark">Clear</button>
             </div>
         </div>
     </div>
+    <script>
+        var txt = document.getElementById('txt');
+        function getNum(le){
+            let num = le.innerText;
+            txt.value += num;
+        }
+        function deleteNum(){
+            txt.value = '';
+        }
+        
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
